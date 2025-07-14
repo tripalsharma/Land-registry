@@ -1,0 +1,5 @@
+{
+  "ganache_url": "http://127.0.0.1:7545",
+  "contract_address": "0xYourDeployedContractAddress",
+  "contract_json_path": "../Smart_Contracts/build/contracts/LandRegistry.json"
+}

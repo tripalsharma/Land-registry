@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('/static/bg.jpeg'); /* 🔁 Update path as needed */
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .form-container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    a {
+      color: #f1c40f;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username" required><br>
+    <input id="password" type="password" placeholder="Password" required><br>
+    <button id="loginBtn">Login</button>
+
+    <p><a href="/signup-page">Signup</a> | <a href="/forgot-password-page">Forgot Password</a></p>
+  </div>
+
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        alert('Please enter both username and password.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ username, password })
+        });
+
+        if (res.ok) {
+          window.location.href = '/dashboard';
+        } else {
+          const text = await res.text();
+          alert('Login failed: ' + text);
+        }
+      } catch (err) {
+        alert('Error logging in: ' + err.message);
+      }
+    });
+  </script>
+  <p style="position: fixed; bottom: 10px; width: 100%; text-align: center; color: white; font-size: 14px;">
+  © 2025 Created by Tripal Sharma
+</p>
+
+</body>
+</html>

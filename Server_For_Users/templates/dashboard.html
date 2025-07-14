@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 40px 0;
+  font-family: Arial, sans-serif;
+  background-image: url('/static/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    input, select {
+      margin: 4px 0;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2ecc71;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    h2, h3, p {
+  background: transparent;  /* or simply remove this line */
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;  /* ensure text is visible on your background */
+}
+    h2 {
+      text-align: center;
+      color: #4ef04e;
+    }
+    ul {
+      padding-left: 20px;
+    }
+
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #4ef04e;
+    }
+
+    #searchResult {
+      background: rgba(255, 255, 255, 0.85);
+      color: black;
+      font-weight: normal;
+      border-radius: 5px;
+    }
+    .form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-top: 5px;
+}
+
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2 id="welcomeMsg">Welcome</h2>
+    <p id="connectStatus">MetaMask not connected</p>
+    <button id="connectWalletBtn" type="button">Connect Wallet</button>
+    <button id="logoutBtn" type="button">Logout</button>
+
+    <h3>Search Land by ID</h3>
+    <input id="searchLandId" placeholder="Enter Land ID" type="number">
+    <button id="searchLandBtn" type="button">Search</button>
+    <div id="searchResult" style="margin-top:10px; padding:10px; border:1px solid #ccc; max-width:400px;"></div>
+
+    <div id="adminSection">
+      <h3>Register Land</h3>
+<div class="form-grid">
+  <div class="form-group">
+    <label for="landId">Land ID</label>
+    <input id="landId" placeholder="Land ID" type="number">
+  </div>
+
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input id="location" placeholder="Location" type="text">
+  </div>
+
+  <div class="form-group">
+    <label for="area">Area (e.g. sq.m)</label>
+    <input id="area" placeholder="Area (e.g. sq.m)" type="number">
+  </div>
+</div>
+
+<button id="registerLandBtn" type="button" style="margin-top: 15px;">Register Land</button>
+<div id="registerLandMsg" style="color: rgb(65, 146, 65); margin-top: 8px;"></div>
+
+
+      <h3>Verify Land</h3>
+      <input id="verifyLandId" placeholder="Land ID" type="number">
+      <button id="verifyLandBtn" type="button">Verify</button>
+      <div id="verifyLandMsg" class="message"></div>
+
+      <h3>Mark For Sale</h3>
+      <input id="saleLandId" placeholder="Land ID" type="number">
+      <input id="salePrice" placeholder="Price in ETH" type="number">
+      <button id="markForSaleBtn" type="button">Mark For Sale</button>
+      <div id="markForSaleMsg" class="message"></div>
+
+      <h3>All Lands</h3>
+      <ul id="landList"></ul>
+    </div>
+
+    <div id="userSection">
+      <h3>Available Lands</h3>
+      <ul id="forSaleList"></ul>
+
+      <h3>Buy Land</h3>
+      <input id="buyLandId" placeholder="Land ID" type="number">
+      <button id="buyLandBtn" type="button">Buy Land</button>
+      <div id="buyLandMsg" class="message"></div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
